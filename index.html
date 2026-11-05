@@ -2,152 +2,332 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07110b">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <title>BULL AI OTC</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#07110b;color:#fff;font-family:Arial,sans-serif;padding:18px}
-.app{max-width:480px;margin:auto}
-header{text-align:center;padding:18px;background:#102319;border:1px solid #245638;border-radius:18px}
-.logo{font-size:35px}
-h1{color:#39ef75;margin:8px 0}
-.sub{color:#9bb5a2;font-size:12px}
-.card{background:#102017;border:1px solid #23452e;border-radius:15px;padding:16px;margin-top:15px}
-label{display:block;color:#a9c1af;font-size:13px;margin-bottom:10px}
-select{width:100%;padding:13px;background:#07130c;color:white;border:1px solid #34734a;border-radius:10px;font-size:15px}
-.languages,.times,.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-button{border:0;border-radius:10px;padding:13px;background:#193624;color:white;font-weight:bold;cursor:pointer}
-button.active{background:#087d35;outline:2px solid #43ef78}
-.times{grid-template-columns:repeat(4,1fr)}
-.mainbtn{width:100%;margin-top:16px;background:#08a943;color:white;font-size:17px;padding:17px}
-.status{text-align:center;color:#f3ca61;font-size:13px;line-height:1.5}
-.footer{text-align:center;color:#789080;font-size:11px;margin:20px}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #07110b;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  max-width: 480px;
+  margin: auto;
+  padding: 12px;
+}
+
+header {
+  text-align: center;
+  padding: 22px 12px;
+  background: #10251a;
+  border: 1px solid #245c37;
+  border-radius: 16px;
+  margin-bottom: 15px;
+}
+
+.logo {
+  font-size: 48px;
+}
+
+h1 {
+  color: #39ef75;
+  margin: 8px 0;
+  font-size: 27px;
+}
+
+.sub {
+  color: #9bb5a2;
+  font-size: 12px;
+}
+
+.card {
+  background: #102017;
+  border: 1px solid #23452e;
+  border-radius: 13px;
+  padding: 16px;
+  margin-bottom: 13px;
+}
+
+label {
+  display: block;
+  color: #a9c1af;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+select {
+  width: 100%;
+  padding: 14px;
+  background: #07130c;
+  color: white;
+  border: 1px solid #34734a;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.languages,
+.times,
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.times {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+button {
+  border: 1px solid #315c3c;
+  border-radius: 10px;
+  padding: 13px 7px;
+  background: #172b1e;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.active {
+  background: #087d35;
+  border-color: #39ef75;
+  color: white;
+}
+
+.mainbtn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 17px;
+  background: #08a94b;
+  color: white;
+  font-size: 17px;
+  border: 0;
+}
+
+.status {
+  text-align: center;
+  color: #f3ca61;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+.footer {
+  text-align: center;
+  color: #789080;
+  font-size: 11px;
+  padding: 15px;
+}
 </style>
 </head>
+
 <body>
 <div class="app">
+
 <header>
-<div class="logo">🐂</div>
-<h1>BULL AI OTC</h1>
-<div class="sub" id="subtitle">AKILLI OTC ANALİZ SİSTEMİ</div>
+  <div class="logo">🐂</div>
+  <h1>BULL AI OTC</h1>
+  <div class="sub" id="subtitle">AKILLI OTC ANALİZ SİSTEMİ</div>
 </header>
 
 <div class="card">
-<label id="languageLabel">DİL SEÇİMİ</label>
-<div class="languages">
-<button onclick="setLang('tr')" id="tr">🇹🇷 Türkçe</button>
-<button onclick="setLang('ru')" id="ru">🇷🇺 Русский</button>
-<button onclick="setLang('en')" id="en">🇬🇧 English</button>
-</div>
-</div>
-
-<div class="card">
-<label id="pairLabel">PARİTE SEÇ</label>
-<select id="pair">
-<option>EUR/USD OTC</option>
-<option>GBP/USD OTC</option>
-<option>USD/JPY OTC</option>
-<option>AUD/USD OTC</option>
-<option>USD/CHF OTC</option>
-<option>USD/CAD OTC</option>
-<option>EUR/GBP OTC</option>
-</select>
+  <label id="languageLabel">DİL SEÇİMİ</label>
+  <div class="languages">
+    <button id="tr" class="active" onclick="setLang('tr')">🇹🇷 Türkçe</button>
+    <button id="ru" onclick="setLang('ru')">🇷🇺 Русский</button>
+    <button id="en" onclick="setLang('en')">🇬🇧 English</button>
+  </div>
 </div>
 
 <div class="card">
-<label id="timeLabel">ZAMAN DİLİMİ</label>
-<div class="times" id="times">
-<button class="active" onclick="setTime(1,this)">1 DK</button>
-<button onclick="setTime(3,this)">3 DK</button>
-<button onclick="setTime(5,this)">5 DK</button>
-<button onclick="setTime(10,this)">10 DK</button>
-<button onclick="setTime(15,this)">15 DK</button>
-<button onclick="setTime(30,this)">30 DK</button>
-<button onclick="setTime(60,this)">60 DK</button>
-</div>
+  <label id="pairLabel">PARİTE SEÇ</label>
+  <select id="pair">
+    <option>EUR/USD OTC</option>
+    <option>GBP/USD OTC</option>
+    <option>USD/JPY OTC</option>
+    <option>AUD/USD OTC</option>
+    <option>USD/CHF OTC</option>
+    <option>USD/CAD OTC</option>
+    <option>EUR/GBP OTC</option>
+  </select>
 </div>
 
 <div class="card">
-<label id="modeLabel">SİNYAL MODU</label>
-<div class="actions">
-<button class="active" id="manual" onclick="setMode('manual')">MANUEL</button>
-<button id="auto" onclick="setMode('auto')">OTOMATİK</button>
-</div>
-</div>
-
-<button class="mainbtn" id="signal" onclick="getSignal()">⚡ SİNYAL AL</button>
-
-<div class="card status" id="status">
-🟡 Canlı OTC fiyat bağlantısı henüz yapılmadı.<br>
-Gerçek veri olmadan AL/SAT sinyali üretilmez.
+  <label id="timeLabel">ZAMAN DİLİMİ</label>
+  <div class="times">
+    <button class="active" onclick="setTime(1,this)">1 DK</button>
+    <button onclick="setTime(3,this)">3 DK</button>
+    <button onclick="setTime(5,this)">5 DK</button>
+    <button onclick="setTime(10,this)">10 DK</button>
+    <button onclick="setTime(15,this)">15 DK</button>
+    <button onclick="setTime(30,this)">30 DK</button>
+    <button onclick="setTime(60,this)">60 DK</button>
+  </div>
 </div>
 
-<div class="footer">BULL AI OTC • TR / RU / EN</div>
+<div class="card">
+  <label id="modeLabel">SİNYAL MODU</label>
+  <div class="actions">
+    <button id="manual" class="active" onclick="setMode('manual')">MANUEL</button>
+    <button id="auto" onclick="setMode('auto')">OTOMATİK</button>
+  </div>
+
+  <button class="mainbtn" id="signal" onclick="getSignal()">
+    ⚡ SİNYAL AL
+  </button>
+
+  <div class="status" id="status">
+    🟡 Canlı OTC fiyat bağlantısı henüz yapılmadı.
+    Gerçek veri olmadan AL/SAT sinyali üretilmez.
+  </div>
+</div>
+
+<div class="footer">
+  BULL AI OTC • TR / RU / EN
+</div>
+
 </div>
 
 <script>
-const tg=window.Telegram?.WebApp;
-if(tg){tg.ready();tg.expand();}
+const tg = window.Telegram?.WebApp;
 
-let lang=localStorage.getItem("bull_lang")||"tr";
-let timeframe=1;
-let mode="manual";
-
-const words={
-tr:{
-subtitle:"AKILLI OTC ANALİZ SİSTEMİ",language:"DİL SEÇİMİ",
-pair:"PARİTE SEÇ",time:"ZAMAN DİLİMİ",mode:"SİNYAL MODU",
-manual:"MANUEL",auto:"OTOMATİK",signal:"⚡ SİNYAL AL",
-status:"🟡 Canlı OTC fiyat bağlantısı henüz yapılmadı.<br>Gerçek veri olmadan AL/SAT sinyali üretilmez.",
-selected:"Seçilen zaman: "
-},
-ru:{
-subtitle:"УМНАЯ СИСТЕМА OTC АНАЛИЗА",language:"ВЫБОР ЯЗЫКА",
-pair:"ВЫБЕРИТЕ ПАРУ",time:"ТАЙМФРЕЙМ",mode:"РЕЖИМ СИГНАЛОВ",
-manual:"ВРУЧНУЮ",auto:"АВТО",signal:"⚡ ПОЛУЧИТЬ СИГНАЛ",
-status:"🟡 Подключение к реальным OTC ценам пока не выполнено.<br>Без реальных данных сигналы не создаются.",
-selected:"Выбранный период: "
-},
-en:{
-subtitle:"SMART OTC ANALYSIS SYSTEM",language:"SELECT LANGUAGE",
-pair:"SELECT PAIR",time:"TIMEFRAME",mode:"SIGNAL MODE",
-manual:"MANUAL",auto:"AUTOMATIC",signal:"⚡ GET SIGNAL",
-status:"🟡 Live OTC price connection is not ready yet.<br>No BUY/SELL signals are generated without real data.",
-selected:"Selected timeframe: "
+if (tg) {
+  tg.ready();
+  tg.expand();
 }
+
+let lang = localStorage.getItem("bull_lang") || "tr";
+let timeframe = 1;
+let mode = "manual";
+
+const words = {
+  tr: {
+    subtitle: "AKILLI OTC ANALİZ SİSTEMİ",
+    language: "DİL SEÇİMİ",
+    pair: "PARİTE SEÇ",
+    time: "ZAMAN DİLİMİ",
+    mode: "SİNYAL MODU",
+    manual: "MANUEL",
+    auto: "OTOMATİK",
+    signal: "⚡ SİNYAL AL",
+    status: "🟡 Canlı OTC fiyat bağlantısı henüz yapılmadı. Gerçek veri olmadan AL/SAT sinyali üretilmez.",
+    selected: "Seçilen zaman: ",
+    sending: "Seçimin Telegram'a gönderiliyor...",
+    browser: "Telegram üzerinden açarak kullanabilirsin."
+  },
+
+  ru: {
+    subtitle: "УМНАЯ СИСТЕМА АНАЛИЗА OTC",
+    language: "ВЫБОР ЯЗЫКА",
+    pair: "ВЫБЕРИТЕ ПАРУ",
+    time: "ТАЙМФРЕЙМ",
+    mode: "РЕЖИМ СИГНАЛОВ",
+    manual: "РУЧНОЙ",
+    auto: "АВТО",
+    signal: "⚡ ПОЛУЧИТЬ СИГНАЛ",
+    status: "🟡 Подключение к OTC-ценам отсутствует. Без реальных данных сигналы не выдаются.",
+    selected: "Выбранный период: ",
+    sending: "Отправка выбора в Telegram...",
+    browser: "Откройте панель через Telegram."
+  },
+
+  en: {
+    subtitle: "SMART OTC ANALYSIS SYSTEM",
+    language: "LANGUAGE",
+    pair: "SELECT PAIR",
+    time: "TIMEFRAME",
+    mode: "SIGNAL MODE",
+    manual: "MANUAL",
+    auto: "AUTOMATIC",
+    signal: "⚡ GET SIGNAL",
+    status: "🟡 Live OTC price connection is not available. No BUY/SELL signals without real data.",
+    selected: "Selected timeframe: ",
+    sending: "Sending your selection to Telegram...",
+    browser: "Please open this panel through Telegram."
+  }
 };
 
-function setLang(l){
-lang=l;
-localStorage.setItem("bull_lang",l);
-const w=words[l];
-document.getElementById("subtitle").textContent=w.subtitle;
-document.getElementById("languageLabel").textContent=w.language;
-document.getElementById("pairLabel").textContent=w.pair;
-document.getElementById("timeLabel").textContent=w.time;
-document.getElementById("modeLabel").textContent=w.mode;
-document.getElementById("manual").textContent=w.manual;
-document.getElementById("auto").textContent=w.auto;
-document.getElementById("signal").textContent=w.signal;
-document.getElementById("status").innerHTML=w.status;
-["tr","ru","en"].forEach(x=>document.getElementById(x).classList.toggle("active",x===l));
+function setLang(l) {
+  lang = l;
+  localStorage.setItem("bull_lang", l);
+
+  const w = words[l];
+
+  document.documentElement.lang = l;
+  document.getElementById("subtitle").textContent = w.subtitle;
+  document.getElementById("languageLabel").textContent = w.language;
+  document.getElementById("pairLabel").textContent = w.pair;
+  document.getElementById("timeLabel").textContent = w.time;
+  document.getElementById("modeLabel").textContent = w.mode;
+  document.getElementById("manual").textContent = w.manual;
+  document.getElementById("auto").textContent = w.auto;
+  document.getElementById("signal").textContent = w.signal;
+  document.getElementById("status").textContent = w.status;
+
+  ["tr", "ru", "en"].forEach(x => {
+    document.getElementById(x).classList.toggle("active", x === l);
+  });
 }
-function setTime(t,b){
-timeframe=t;
-document.querySelectorAll(".times button").forEach(x=>x.classList.remove("active"));
-b.classList.add("active");
-document.getElementById("status").textContent=words[lang].selected+t+" min";
+
+function setTime(t, b) {
+  timeframe = t;
+
+  document.querySelectorAll(".times button").forEach(x => {
+    x.classList.remove("active");
+  });
+
+  b.classList.add("active");
+
+  document.getElementById("status").textContent =
+    words[lang].selected + t + " min";
 }
-function setMode(m){
-mode=m;
-document.getElementById("manual").classList.toggle("active",m==="manual");
-document.getElementById("auto").classList.toggle("active",m==="auto");
+
+function setMode(m) {
+  mode = m;
+
+  document.getElementById("manual").classList.toggle(
+    "active", m === "manual"
+  );
+
+  document.getElementById("auto").classList.toggle(
+    "active", m === "auto"
+  );
 }
-function getSignal(){
-document.getElementById("status").innerHTML=words[lang].status;
+
+function getSignal() {
+  const pair = document.getElementById("pair").value;
+
+  if (!tg || !tg.initData) {
+    document.getElementById("status").textContent =
+      words[lang].browser;
+    return;
+  }
+
+  const data = {
+    type: "signal_request",
+    pair: pair,
+    timeframe: timeframe,
+    mode: mode,
+    language: lang
+  };
+
+  document.getElementById("status").textContent =
+    words[lang].sending;
+
+  tg.sendData(JSON.stringify(data));
 }
+
 setLang(lang);
 </script>
+
 </body>
 </html>
